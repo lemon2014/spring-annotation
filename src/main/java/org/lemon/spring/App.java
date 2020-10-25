@@ -4,6 +4,8 @@ import org.lemon.spring.bean.Person;
 import org.lemon.spring.config.MainConfig;
 import org.lemon.spring.config.MainConfigOfAOP;
 import org.lemon.spring.config.MyMethod;
+import org.lemon.spring.transaction.MyTxConfig;
+import org.lemon.spring.transaction.PaymentService;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -37,9 +39,16 @@ public class App {
 //        Object obj = context1.getBean("myFactoryBean");
 //        System.out.println(obj);
 
+//        ApplicationContext context1 = new AnnotationConfigApplicationContext(MainConfigOfAOP.class);
+//        Arrays.asList(context1.getBeanDefinitionNames()).forEach(beanName -> System.out.println(beanName));
+//        Object obj = context1.getBean("myMethod");
+//        System.out.println(obj.getClass());//这里返回的就是代理对象
+//        System.out.println("================" + ((MyMethod)obj).add(9, 4));
 
-        ApplicationContext context1 = new AnnotationConfigApplicationContext(MainConfigOfAOP.class);
-        MyMethod method = context1.getBean(MyMethod.class);
-        System.out.println("================" + method.div(9, 4));
+
+        ApplicationContext context1 = new AnnotationConfigApplicationContext(MyTxConfig.class);
+        PaymentService service = context1.getBean(PaymentService.class);
+        service.insertUser();
+
     }
 }

@@ -18,7 +18,7 @@ import java.util.Arrays;
 @Component
 public class MyAspect {
 
-    @Pointcut("execution(public int org.lemon.spring.config.MyMethod.*(..))")
+    @Pointcut("execution(public int org.lemon.spring.config.MyMethod.div(..))")
     public void pointCut() {
     }
 
